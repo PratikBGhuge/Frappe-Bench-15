@@ -1,0 +1,1080 @@
+2025-06-05 13:56:42,474 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {'sid': '7b294a0768adb5f1853a320394a9fe5890d30e65bd89cecc4a0df8b6'}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 308, in resume
+    data = self.get_session_record()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 326, in get_session_record
+    r = self.get_session_data()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 343, in get_session_data
+    data = self.get_session_data_from_db()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 374, in get_session_data_from_db
+    .where(sessions.lastupdate > get_expired_threshold())
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 455, in get_expired_threshold
+    now = frappe.utils.now()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/data.py", line 361, in now
+    return now_datetime().strftime(DATETIME_FORMAT)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/data.py", line 313, in now_datetime
+    dt = convert_utc_to_system_timezone(datetime.datetime.now(pytz.UTC))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/data.py", line 348, in convert_utc_to_system_timezone
+    time_zone = get_system_timezone()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/data.py", line 328, in get_system_timezone
+    return frappe.get_system_settings("time_zone") or "Asia/Kolkata"  # Default to India ?!
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 13:56:43,770 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 313, in resume
+    self.validate_user()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 238, in validate_user
+    if not frappe.get_cached_value("User", self.user, "enabled"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1236, in get_cached_value
+    doc = get_cached_doc(doctype, name)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 13:56:45,242 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 313, in resume
+    self.validate_user()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 238, in validate_user
+    if not frappe.get_cached_value("User", self.user, "enabled"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1236, in get_cached_value
+    doc = get_cached_doc(doctype, name)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 13:56:46,213 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 313, in resume
+    self.validate_user()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 238, in validate_user
+    if not frappe.get_cached_value("User", self.user, "enabled"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1236, in get_cached_value
+    doc = get_cached_doc(doctype, name)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 13:56:53,130 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 313, in resume
+    self.validate_user()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 238, in validate_user
+    if not frappe.get_cached_value("User", self.user, "enabled"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1236, in get_cached_value
+    doc = get_cached_doc(doctype, name)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 13:56:54,016 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 313, in resume
+    self.validate_user()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 238, in validate_user
+    if not frappe.get_cached_value("User", self.user, "enabled"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1236, in get_cached_value
+    doc = get_cached_doc(doctype, name)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 13:56:54,652 ERROR frappe Failed to run after request hook
+Site: frape.com
+Form Dict: {}
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 100, in application
+    init_request(request)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 196, in init_request
+    frappe.local.http_request = HTTPRequest()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 44, in __init__
+    self.set_session()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 78, in set_session
+    frappe.local.login_manager = LoginManager()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 117, in __init__
+    self.make_session(resume=True)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/auth.py", line 211, in make_session
+    frappe.local.session_obj = Session(
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 230, in __init__
+    self.resume()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 313, in resume
+    self.validate_user()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/sessions.py", line 238, in validate_user
+    if not frappe.get_cached_value("User", self.user, "enabled"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1236, in get_cached_value
+    doc = get_cached_doc(doctype, name)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 133, in application
+    response = handle_exception(e)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/permissions.py", line 870, in wrapper
+    return fn(e, *args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 325, in handle_exception
+    allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 2328, in get_system_settings
+    local.system_settings = system_settings = get_cached_doc("System Settings")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1179, in get_cached_doc
+    doc = get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1305, in get_doc
+    return frappe.model.document.get_doc(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/document.py", line 83, in get_doc
+    controller = get_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 67, in get_controller
+    return import_controller(doctype)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/model/base_document.py", line 89, in import_controller
+    class_overrides = frappe.get_hooks("override_doctype_class")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 57, in wrapper
+    return frappe.local.request_cache[func][args_key]
+KeyError: 5740354900026072187
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 147, in application
+    run_after_request_hooks(request, response)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/app.py", line 162, in run_after_request_hooks
+    for after_request_task in frappe.get_hooks("after_request"):
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1609, in get_hooks
+    hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/redis_wrapper.py", line 101, in get_value
+    val = generator()
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/utils/caching.py", line 59, in wrapper
+    return_val = func(*args, **kwargs)
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1576, in _load_app_hooks
+    app_hooks = get_module(f"{app}.hooks")
+  File "/home/pratik/frappe-bench-15/apps/frappe/frappe/__init__.py", line 1442, in get_module
+    return importlib.import_module(modulename)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/pratik/frappe-bench-15/apps/my_custom_app/my_custom_app/hooks.py", line 12, in <module>
+    app_include_js = ["my_custom_app.bundle.js"] if _dict.get("developer_mode") else ["my_custom_app.min.js"]
+NameError: name '_dict' is not defined
+2025-06-05 14:54:18,288 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'app_path': 'website-item/new-website-item-bneangqjyx'}
+2025-06-05 14:54:20,739 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'app_path': 'website-item/new-website-item-bneangqjyx'}
+2025-06-05 14:54:31,524 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'app_path': 'website-item/new-website-item-bneangqjyx'}
+2025-06-05 14:56:52,733 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-pontofioer","__islocal":1,"__unsaved":1,"owner":"DigiopenPratik@gmail.com","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"web_item_name":"IPhone- 17 Pro","variant_of":null,"item_name":"IPhone- 17 Pro","item_group":"Iphone","description":"IPhone- 17 Pro","brand":null,"item_code":"IPhone- 17 Pro","first_name":"csd","middle_name":"dsfs","last_name":"fsds"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
+2025-06-05 14:57:27,245 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-ppkggeuayo","__islocal":1,"__unsaved":1,"owner":"DigiopenPratik@gmail.com","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"web_item_name":"IPhone- 17 Pro","variant_of":null,"item_name":"IPhone- 17 Pro","item_group":"Iphone","description":"IPhone- 17 Pro","brand":null,"item_code":"IPhone- 17 Pro","first_name":"ds","middle_name":"dfds","last_name":"dsff"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
+2025-06-05 15:03:03,938 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-czjzspyves","__islocal":1,"__unsaved":1,"owner":"DigiopenPratik@gmail.com","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"first_name":"asas","middle_name":"dss","last_name":"sdff","web_item_name":"IPhone- 17 Pro","variant_of":null,"item_name":"IPhone- 17 Pro","item_group":"Iphone","description":"IPhone- 17 Pro","brand":null,"item_code":"IPhone- 17 Pro"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
+2025-06-05 15:03:21,183 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-kkayzlyltw","__islocal":1,"__unsaved":1,"owner":"DigiopenPratik@gmail.com","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"web_item_name":"IPhone- 17 Pro","variant_of":null,"item_name":"IPhone- 17 Pro","item_group":"Iphone","description":"IPhone- 17 Pro","brand":null,"item_code":"IPhone- 17 Pro","first_name":"ss","middle_name":"dsf","last_name":"dsf"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
+2025-06-05 15:06:29,525 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-kkayzlyltw","__islocal":1,"__unsaved":1,"owner":"DigiopenPratik@gmail.com","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"web_item_name":"IPhone- 17 Pro","variant_of":null,"item_name":"IPhone- 17 Pro","item_group":"Iphone","description":"IPhone- 17 Pro","brand":null,"item_code":"IPhone- 17 Pro","first_name":"ss","middle_name":"dsf","last_name":"dsf"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
+2025-06-05 15:11:40,889 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-glhhazvurl","__islocal":1,"__unsaved":1,"owner":"DigiopenPratik@gmail.com","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"first_name":"sds","middle_name":"sdf","last_name":"sdfs","web_item_name":"IPhone- 17 Pro","variant_of":null,"item_name":"IPhone- 17 Pro","item_group":"Iphone","description":"IPhone- 17 Pro","brand":null,"item_code":"IPhone- 17 Pro"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
+2025-06-06 10:37:36,660 ERROR frappe New Exception collected in error log
+Site: frape.com
+Form Dict: {'doc': '{"docstatus":0,"doctype":"Website Item","name":"new-website-item-oyerlfvnmr","__islocal":1,"__unsaved":1,"owner":"Administrator","naming_series":"WEB-ITM-.####","has_variants":0,"published":1,"stock_uom":"Nos","on_backorder":0,"website_specifications":[],"show_tabbed_section":0,"tabs":[],"recommended_items":[],"offers":[],"website_item_groups":[],"web_item_name":"Redmi Note 7","variant_of":null,"item_name":"Redmi Note 7","item_group":"Redmi","description":"Redmi Note 7","brand":null,"item_code":"Redmi Note 7","first_name":"Ganesh","middle_name":"M","last_name":"Kale"}', 'action': 'Save', 'cmd': 'frappe.desk.form.save.savedocs'}
