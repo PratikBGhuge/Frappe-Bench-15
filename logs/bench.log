@@ -122,3 +122,33 @@
 2025-06-06 12:24:18,217 INFO /home/pratik/.local/bin/bench serve --port 8005
 2025-06-06 12:24:18,446 INFO /home/pratik/.local/bin/bench worker
 2025-06-06 12:24:18,450 INFO /home/pratik/.local/bin/bench schedule
+2025-06-06 17:45:22,036 INFO /home/pratik/.local/bin/bench start
+2025-06-06 18:00:01,897 INFO /home/pratik/.local/bin/bench --verbose --site all backup
+2025-06-07 12:00:01,510 INFO /home/pratik/.local/bin/bench --verbose --site all backup
+2025-06-08 23:20:41,382 INFO /home/pratik/.local/bin/bench start
+2025-06-08 23:20:41,854 INFO /home/pratik/.local/bin/bench serve --port 8005
+2025-06-08 23:20:41,859 INFO /home/pratik/.local/bin/bench watch
+2025-06-08 23:20:41,885 INFO /home/pratik/.local/bin/bench worker
+2025-06-08 23:20:41,917 INFO /home/pratik/.local/bin/bench schedule
+2025-06-09 10:49:31,799 INFO /home/pratik/.local/bin/bench start
+2025-06-09 10:49:32,251 INFO /home/pratik/.local/bin/bench worker
+2025-06-09 10:49:32,273 INFO /home/pratik/.local/bin/bench watch
+2025-06-09 10:49:32,281 INFO /home/pratik/.local/bin/bench schedule
+2025-06-09 10:49:32,281 INFO /home/pratik/.local/bin/bench serve --port 8005
+2025-06-09 11:05:28,531 INFO /home/pratik/.local/bin/bench start
+2025-06-09 11:05:29,137 INFO /home/pratik/.local/bin/bench worker
+2025-06-09 11:05:29,187 INFO /home/pratik/.local/bin/bench schedule
+2025-06-09 11:05:29,192 INFO /home/pratik/.local/bin/bench serve --port 8005
+2025-06-09 11:05:29,201 INFO /home/pratik/.local/bin/bench watch
+2025-06-09 11:10:32,425 INFO /home/pratik/.local/bin/bench --site frappesite export-fixtures
+2025-06-09 11:10:46,361 INFO /home/pratik/.local/bin/bench --site frape.com export-fixtures
+2025-06-09 11:12:17,404 INFO /home/pratik/.local/bin/bench --site frape.com export-fixtures
+2025-06-09 11:12:43,890 INFO /home/pratik/.local/bin/bench --site frape.com export-fixtures
+2025-06-09 12:00:02,344 INFO /home/pratik/.local/bin/bench --verbose --site all backup
+2025-06-09 13:05:58,465 INFO /home/pratik/.local/bin/bench start
+2025-06-09 13:09:10,746 INFO /home/pratik/.local/bin/bench start
+2025-06-09 13:09:11,294 INFO /home/pratik/.local/bin/bench worker
+2025-06-09 13:09:11,317 INFO /home/pratik/.local/bin/bench serve --port 8005
+2025-06-09 13:09:11,325 INFO /home/pratik/.local/bin/bench watch
+2025-06-09 13:09:11,466 INFO /home/pratik/.local/bin/bench schedule
+2025-06-09 18:00:01,545 INFO /home/pratik/.local/bin/bench --verbose --site all backup
