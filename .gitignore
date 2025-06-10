@@ -32,3 +32,4 @@ sites/common_site_config.json
 node_modules/
 yarn-error.log
 .DS_Store
+Frappe/
